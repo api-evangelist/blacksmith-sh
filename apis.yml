@@ -1,0 +1,143 @@
+aid: blacksmith-sh
+url: https://raw.githubusercontent.com/api-evangelist/blacksmith-sh/refs/heads/main/apis.yml
+name: Blacksmith
+kind: company
+description: Blacksmith runs your GitHub Actions up to 2x faster at half the cost
+  on a fleet of modern gaming-CPU bare metal, booting ephemeral Firecracker microVMs
+  in under three seconds. It is a drop-in replacement integrated as a GitHub App and
+  selected via runs-on runner tags, with a co-located CI cache, 40x faster Docker
+  layer caching, sticky disks, an observability dashboard, and a Testbox CLI. Blacksmith
+  does not publish a general-purpose public REST API - integration is GitHub-App,
+  YAML runner-tag, and GitHub Actions based.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- CI/CD
+- GitHub Actions
+- Runners
+- Caching
+- Docker
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: blacksmith-sh:github-actions-runners
+  name: Blacksmith GitHub Actions Runners
+  tags:
+  - GitHub Actions
+  - Runners
+  - CI/CD
+  - Firecracker
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.blacksmith.sh/blacksmith-runners/overview
+  baseURL: https://app.blacksmith.sh
+  properties:
+  - url: https://docs.blacksmith.sh/blacksmith-runners/overview
+    type: Documentation
+  - url: https://docs.blacksmith.sh/introduction/quickstart
+    type: APIReference
+  - url: openapi/blacksmith-sh-openapi.yml
+    type: OpenAPI
+  description: Drop-in faster GitHub-hosted runner replacement selected by changing
+    the runs-on tag (e.g. blacksmith-2vcpu-ubuntu-2404). Linux/Windows jobs run in
+    ephemeral Firecracker microVMs; x64, ARM64, and macOS (Apple Silicon M4) families
+    are offered in 2-32 vCPU sizes. Configured via the GitHub App and YAML workflow,
+    not a programmatic REST API.
+- aid: blacksmith-sh:docker-builds
+  name: Blacksmith Docker Builds
+  tags:
+  - Docker
+  - BuildKit
+  - Layer Caching
+  - Builds
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.blacksmith.sh/blacksmith-caching/docker-builds
+  baseURL: https://app.blacksmith.sh
+  properties:
+  - url: https://docs.blacksmith.sh/blacksmith-caching/docker-builds
+    type: Documentation
+  - url: openapi/blacksmith-sh-openapi.yml
+    type: OpenAPI
+  description: Accelerated Docker image builds via Blacksmith's BuildKit and the useblacksmith/build-push-action
+    and useblacksmith/setup-docker-builder GitHub Actions, reusing cached layers on
+    sticky disks to rebuild only what changed - up to 40x faster. Used as GitHub
+    Actions in a workflow, not via a public REST API.
+- aid: blacksmith-sh:cache
+  name: Blacksmith Cache
+  tags:
+  - Cache
+  - Sticky Disks
+  - Dependencies
+  - Artifacts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.blacksmith.sh/blacksmith-caching/dependencies-actions
+  baseURL: https://app.blacksmith.sh
+  properties:
+  - url: https://docs.blacksmith.sh/blacksmith-caching/dependencies-actions
+    type: Documentation
+  - url: openapi/blacksmith-sh-openapi.yml
+    type: OpenAPI
+  description: Co-located CI cache that transparently backs official GitHub and popular
+    third-party cache actions (e.g. actions/cache, useblacksmith/cache) at roughly
+    400MB/s, plus Sticky Disks, container init pre-hydration, and Git checkout caching.
+    Activated by running cache GitHub Actions on Blacksmith runners, not via a public
+    REST API.
+- aid: blacksmith-sh:testbox-cli
+  name: Blacksmith Testbox CLI
+  tags:
+  - CLI
+  - Testbox
+  - Coding Agents
+  - Beta
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.blacksmith.sh/blacksmith-testbox/cli
+  baseURL: https://app.blacksmith.sh
+  properties:
+  - url: https://docs.blacksmith.sh/blacksmith-testbox/cli
+    type: Documentation
+  - url: https://docs.blacksmith.sh/blacksmith-testbox/overview
+    type: APIReference
+  description: Command-line interface (beta) that lets coding agents run CI against
+    local changes instantly - blacksmith testbox warmup/run/status dispatch a
+    workflow to a warm microVM, rsync local changes, and execute commands over SSH.
+    The CLI is the programmatic surface; there is no documented public REST API.
+- aid: blacksmith-sh:dashboard
+  name: Blacksmith Dashboard and Observability
+  tags:
+  - Dashboard
+  - Observability
+  - Analytics
+  - Management
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.blacksmith.sh/blacksmith-observability/dashboard
+  baseURL: https://app.blacksmith.sh
+  properties:
+  - url: https://docs.blacksmith.sh/blacksmith-observability/dashboard
+    type: Documentation
+  - url: https://app.blacksmith.sh
+    type: Console
+  description: Web dashboard at app.blacksmith.sh for organization setup, runner and
+    cache management, and observability - CI analytics, run history, logs, machine
+    metrics, monitors, SSH access, and test analytics. A management console, not a
+    documented public REST API.
+common:
+- type: GitHubOrganization
+  url: https://github.com/useblacksmith
+- type: LinkedIn
+  url: https://www.linkedin.com/company/useblacksmith
+- type: Website
+  url: https://www.blacksmith.sh/
+- type: Documentation
+  url: https://docs.blacksmith.sh
+- type: Console
+  url: https://app.blacksmith.sh
+- type: Status
+  url: https://status.blacksmith.sh
+- type: Plans
+  url: plans/blacksmith-sh-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/blacksmith-sh-rate-limits.yml
+- type: FinOps
+  url: finops/blacksmith-sh-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

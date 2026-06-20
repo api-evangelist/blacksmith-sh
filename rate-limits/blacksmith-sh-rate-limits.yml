@@ -1,0 +1,69 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Blacksmith
+providerId: blacksmith-sh
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- CI/CD
+- GitHub Actions
+- Runners
+- Caching
+- Docker
+- Rate Limiting
+- Quotas
+- Concurrency
+description: >-
+  Blacksmith does not expose a documented public REST API, so there are no
+  published HTTP request rate limits to reconcile. Blacksmith advertises
+  unlimited job concurrency on its runner fleet - jobs are not subject to the
+  same concurrency caps as GitHub-hosted runners and are not queued behind
+  other tenants. The relevant limits are upstream GitHub API rate limits used
+  when registering and managing runners; Blacksmith offers optional auxiliary
+  "Scale Apps" (additional GitHub Apps) that raise per-organization
+  rate-limit headroom for runner provisioning. The 3,000 free minutes per
+  month and 25 GB free cache storage per repository per week function as
+  usage quotas rather than throttling limits. Specific values are not
+  reconciled in this artifact.
+notes: >-
+  Verify concurrency claims, Scale Apps behavior, and any control-plane
+  limits on reconciliation. No public API request-rate limits are documented
+  because no public REST API is published.
+sources:
+- https://docs.blacksmith.sh/blacksmith-runners/overview
+- https://docs.blacksmith.sh/blacksmith-administration/scale-apps
+- https://docs.blacksmith.sh/blacksmith-administration/network-allowlisting
+- https://www.blacksmith.sh/pricing
+responseCodes:
+  throttled: see provider documentation
+limits:
+- name: Job Concurrency
+  scope: organization
+  metric: jobs
+  limit: unlimited (advertised)
+  notes: Blacksmith advertises unlimited concurrency; jobs are not queued behind hosted-runner concurrency caps.
+- name: Included Minutes
+  scope: account
+  metric: minutes
+  limit: 3000 free per month
+  notes: Usage quota; additional minutes billed per-minute pay-as-you-go.
+- name: Included Cache Storage
+  scope: repository
+  metric: gigabytes
+  limit: 25 GB free per week
+  notes: Usage quota per repository; co-located cache.
+- name: GitHub Control-Plane Rate Limit Headroom
+  scope: organization
+  metric: requests
+  limit: see provider documentation
+  notes: Upstream GitHub API limits for runner registration/management; optional Scale Apps raise per-org headroom.
+policies:
+- name: Unlimited Concurrency
+  description: Runner jobs are not subject to GitHub-hosted concurrency limits and do not queue behind other tenants.
+- name: Scale Apps
+  description: Auxiliary GitHub Apps can be installed to raise per-organization GitHub rate-limit headroom for runner provisioning.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

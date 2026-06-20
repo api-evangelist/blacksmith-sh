@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Blacksmith",
+    "version": "0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "none"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "About This Collection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Install the Blacksmith GitHub App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.blacksmith.sh"
+          },
+          "docs": "Blacksmith does not publish a documented public REST API. It is integrated as a GitHub App and used via GitHub Actions runner tags (runs-on) and useblacksmith/* Actions. Install the app for your organization, then swap your runs-on tag to a Blacksmith runner label (e.g. blacksmith-2vcpu-ubuntu-2404)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Testbox CLI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "blacksmith testbox warmup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://docs.blacksmith.sh/blacksmith-testbox/cli"
+          },
+          "docs": "Dispatches a testbox and returns an ID immediately. Required before any run command. Flags: --idle-timeout, --job, --ref, --ssh-public-key."
+        },
+        {
+          "info": {
+            "name": "blacksmith testbox run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://docs.blacksmith.sh/blacksmith-testbox/cli"
+          },
+          "docs": "Syncs local changes (rsync --delete --checksum) and executes a command on the testbox, blocking until ready. Flags: --id, --debug, --ssh-private-key. Exits with the remote command's exit code."
+        },
+        {
+          "info": {
+            "name": "blacksmith testbox status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://docs.blacksmith.sh/blacksmith-testbox/cli"
+          },
+          "docs": "Shows the current status of a testbox. Supports --wait to block until the testbox is ready."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dashboard & Observability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Open Blacksmith Console",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.blacksmith.sh"
+          },
+          "docs": "CI analytics, run history, logs, metrics, monitors, test analytics, and SSH access live in the dashboard at app.blacksmith.sh. Not a REST API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,102 @@
+aid: blacksmith-sh
+name: Blacksmith
+review:
+  question: Does Blacksmith expose a documented public REST or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Blacksmith does not document any
+    streaming API surface (no WebSocket, no Server-Sent Events). The only
+    realtime interaction is interactive SSH into a running CI job/VM for
+    debugging, which is a transport for shell access and not a documented
+    event-driven or streaming API. There is therefore nothing in AsyncAPI
+    scope to model.
+findings:
+  summary: |
+    Blacksmith does not publish a documented, general-purpose public REST
+    API. Blacksmith is delivered as a GitHub App plus a set of GitHub Actions
+    and a web dashboard. Integration is done by (1) installing the Blacksmith
+    GitHub App for an organization at app.blacksmith.sh, (2) changing the
+    `runs-on` tag in workflow YAML to a Blacksmith runner label such as
+    `blacksmith-2vcpu-ubuntu-2404`, and (3) optionally adding Blacksmith's
+    cache and Docker-build Actions (e.g. `useblacksmith/cache`,
+    `useblacksmith/build-push-action`, `useblacksmith/setup-docker-builder`).
+    The only documented programmatic, scriptable surface is the Blacksmith
+    Testbox CLI (`blacksmith testbox warmup|run|status`), in early beta.
+    Management and observability (CI analytics, run history, logs, metrics,
+    monitors, test analytics, SSH debugging) are accessed through the
+    app.blacksmith.sh dashboard. The docs index (llms.txt) links an OpenAPI
+    document at https://docs.blacksmith.sh/api-reference/openapi.json, but
+    that URL returns HTTP 404 and no api-reference section is reachable, so no
+    callable public API is documented as of the review date.
+  transports:
+    - protocol: GitHub App
+      scheme: https
+      note: Primary integration; org-level installation grants Blacksmith permission to run Actions jobs.
+      documented: true
+    - protocol: GitHub Actions
+      scheme: yaml
+      note: runs-on runner tags and useblacksmith/* Actions configured in workflow YAML.
+      documented: true
+    - protocol: CLI
+      scheme: cli
+      note: blacksmith testbox warmup/run/status; the documented scriptable surface (beta).
+      documented: true
+    - protocol: SSH
+      scheme: ssh
+      note: Interactive SSH into a running CI VM for debugging; shell access, not a documented API.
+      documented: true
+    - protocol: REST
+      scheme: https
+      documented: false
+      note: docs.blacksmith.sh/api-reference/openapi.json returns HTTP 404; no public REST API is documented.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Blacksmith's product or docs.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming API is documented.
+  surfacesConfirmed:
+    - GitHub App installation at https://app.blacksmith.sh
+    - runs-on runner tags (e.g. blacksmith-2vcpu-ubuntu-2404, -arm, windows-2025, macos-latest)
+    - useblacksmith/cache GitHub Action (co-located CI cache)
+    - useblacksmith/build-push-action and useblacksmith/setup-docker-builder (Docker builds)
+    - Sticky Disks, container init caching, Git checkout caching
+    - blacksmith testbox warmup / run / status CLI commands
+    - Observability dashboard - CI analytics, run history, logs, metrics, monitors, test analytics, SSH access
+  apiReferenceCheck:
+    url: https://docs.blacksmith.sh/api-reference/openapi.json
+    httpStatus: 404
+    note: Referenced in llms.txt under "OpenAPI Specs" but not publicly retrievable at review time.
+sources:
+  - url: https://docs.blacksmith.sh/introduction/quickstart
+    type: Documentation
+    note: Quickstart describes GitHub App install and runs-on tag swap; no REST API.
+  - url: https://docs.blacksmith.sh/blacksmith-runners/overview
+    type: Documentation
+    note: Instance types and runner tags; advertises unlimited concurrency and Firecracker microVMs.
+  - url: https://docs.blacksmith.sh/blacksmith-testbox/cli
+    type: Documentation
+    note: Testbox CLI command reference - the documented programmatic surface (beta).
+  - url: https://docs.blacksmith.sh/llms.txt
+    type: Documentation
+    note: Full documentation index; links an OpenAPI doc that 404s.
+  - url: https://www.blacksmith.sh/pricing
+    type: Documentation
+    note: Per-minute runner pricing and add-ons.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No REST or streaming API surface exists to model. The catalog documents
+    the real surfaces - GitHub App, GitHub Actions runner tags, cache/Docker
+    Actions, the Testbox CLI, and the observability dashboard. The OpenAPI
+    artifact at openapi/blacksmith-sh-openapi.yml is intentionally left with
+    no paths and an accurate description rather than fabricating endpoints.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

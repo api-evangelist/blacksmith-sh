@@ -1,0 +1,205 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Blacksmith
+providerId: blacksmith-sh
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- CI/CD
+- GitHub Actions
+- Runners
+- Caching
+- Docker
+- Plans
+description: >-
+  Blacksmith uses transparent pay-as-you-go, per-minute compute pricing for
+  GitHub Actions runners, billed by runner family (x64 / ARM64 / Windows /
+  macOS). Blacksmith runners are exactly half the cost of GitHub-hosted
+  runners per minute and roughly 2x faster, for combined savings of about
+  75%. Every pay-as-you-go account includes 3,000 free minutes per month and
+  25 GB of free cache storage per repository per week (about 2.5x GitHub).
+  Persistent storage features - Docker layer caching and Sticky Disks - and
+  static IPs are priced as add-ons. An Enterprise plan adds an SLA, priority
+  support, and white-glove onboarding. Discount programs exist for startups
+  and open source.
+notes: >-
+  Per-minute rates as published on the Blacksmith pricing page; the 2-vCPU
+  base rates are shown below and larger instances scale with vCPU count.
+  Verify current rates and runner families on the pricing page during
+  reconciliation.
+sources:
+- https://www.blacksmith.sh/pricing
+- https://docs.blacksmith.sh/blacksmith-runners/overview
+- https://docs.blacksmith.sh/blacksmith-runners/static-ip
+plans:
+- id: blacksmith-pay-as-you-go
+  name: Pay-as-you-go
+  type: usage
+  description: >-
+    Per-minute compute metered across all Blacksmith runner families with no
+    monthly minimum. Includes 3,000 free minutes per month and 25 GB free
+    cache storage per repository per week.
+  entries:
+  - label: Ubuntu x64 Runner (2 vCPU base)
+    name: runner_ubuntu_x64
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.004 per minute (2 vCPU; scales with vCPU count)
+    userMultiplied: false
+  - label: Ubuntu ARM64 Runner (2 vCPU base)
+    name: runner_ubuntu_arm
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.0025 per minute (2 vCPU; scales with vCPU count)
+    userMultiplied: false
+  - label: Windows x64 Runner (2 vCPU base)
+    name: runner_windows_x64
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.008 per minute (2 vCPU; scales with vCPU count)
+    userMultiplied: false
+  - label: macOS (Apple Silicon M4) Runner
+    name: runner_macos_m4
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~$0.08 per minute
+    userMultiplied: false
+  - label: Included Free Minutes
+    name: free_minutes
+    type: free
+    metric: minutes
+    limit: 3000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.00 (included)
+    userMultiplied: false
+  - label: Included Cache Storage
+    name: free_cache_storage
+    type: free
+    metric: gigabytes
+    limit: 25
+    timeFrame: week
+    geo: global
+    unit: 1
+    price: $0.00 per repository per week (included)
+    userMultiplied: false
+  - label: Docker Layer Caching (Sticky Disk)
+    name: docker_layer_cache
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: +$0.50 per GB per month
+    userMultiplied: false
+  - label: Sticky Disks
+    name: sticky_disks
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: +$0.50 per GB per month
+    userMultiplied: false
+  - label: Static IP
+    name: static_ip
+    type: flat
+    metric: ip_address
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: +$100 per IP per month
+    userMultiplied: false
+  elements:
+  - name: GitHub Actions Runners
+  - name: Co-located CI Cache
+  - name: Docker Builds
+  - name: Sticky Disks
+  - name: Observability Dashboard
+  - name: Testbox CLI
+- id: blacksmith-startups
+  name: Startups
+  type: usage
+  description: >-
+    Discounted access for qualifying startups. Eligibility is approximately
+    under 100 employees, under $50M raised, and under 5 years operating.
+  entries:
+  - label: Startup Discount
+    name: startup_discount
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: discounted pay-as-you-go (apply to qualify)
+    userMultiplied: false
+  elements:
+  - name: GitHub Actions Runners
+- id: blacksmith-open-source
+  name: Open Source
+  type: free
+  description: >-
+    Free tier available for qualifying open source projects.
+  entries:
+  - label: Open Source Tier
+    name: open_source
+    type: free
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free for qualifying projects
+    userMultiplied: false
+  elements:
+  - name: GitHub Actions Runners
+- id: blacksmith-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Available on request. Adds a 99.9% SLA, 24/7 priority support, a
+    dedicated Slack channel, white-glove onboarding, and CI optimization
+    consulting. Contact Blacksmith sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: 99.9% SLA
+  - name: 24/7 Priority Support
+  - name: Dedicated Slack Channel
+  - name: White-Glove Onboarding
+  - name: CI Optimization Consulting
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

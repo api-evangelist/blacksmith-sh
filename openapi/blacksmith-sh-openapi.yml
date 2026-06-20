@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Blacksmith
+  description: >-
+    Blacksmith does not publish a documented, general-purpose public REST API.
+    Blacksmith is consumed as a GitHub App and a set of GitHub Actions: you
+    install the app for your organization at https://app.blacksmith.sh, change
+    the `runs-on` tag in your workflow to a Blacksmith runner label (for
+    example `blacksmith-2vcpu-ubuntu-2404`), and optionally add Blacksmith's
+    cache and Docker-build Actions (such as `useblacksmith/cache`,
+    `useblacksmith/build-push-action`, and `useblacksmith/setup-docker-builder`).
+    Programmatic interaction with running CI jobs is provided through the
+    Blacksmith Testbox CLI (`blacksmith testbox warmup|run|status`), and
+    management/observability is provided through the web dashboard at
+    app.blacksmith.sh. The docs site references an OpenAPI document at
+    https://docs.blacksmith.sh/api-reference/openapi.json, but that resource
+    is not publicly available (HTTP 404) as of this catalog date, so no
+    operations are modeled here. This specification is intentionally left with
+    no paths rather than fabricating endpoints. Re-check the api-reference and
+    update on reconciliation if Blacksmith publishes a public API.
+  termsOfService: https://docs.blacksmith.sh/about/terms-of-service
+  contact:
+    name: Blacksmith Support
+    url: https://app.blacksmith.sh/?support=open
+  version: '0.1'
+servers:
+  - url: https://app.blacksmith.sh
+    description: >-
+      Blacksmith web console and GitHub App surface. Not a documented REST API
+      base path; listed for reference only.
+paths: {}
+components:
+  securitySchemes:
+    githubApp:
+      type: oauth2
+      description: >-
+        Access to Blacksmith is authorized through the Blacksmith GitHub App
+        installed on a GitHub organization, not via a public API key or bearer
+        token. There is no documented machine-to-machine API auth scheme.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://github.com/apps/blacksmith
+          tokenUrl: https://github.com/login/oauth/access_token
+          scopes: {}

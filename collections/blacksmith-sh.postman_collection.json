@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "id": "9d2c1b00-0001-4a10-9c01-blacksmith0001",
+      "name": "About This Collection",
+      "description": {
+        "content": "Blacksmith does not publish a documented public REST API. It is integrated as a GitHub App and used via GitHub Actions runner tags (runs-on) and useblacksmith/* Actions. The only documented scriptable surface is the Blacksmith Testbox CLI. This collection documents that real surface rather than fabricating HTTP endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d2c1b00-0002-4a10-9c01-blacksmith0002",
+          "name": "Install the Blacksmith GitHub App",
+          "request": {
+            "name": "Install the Blacksmith GitHub App",
+            "description": {
+              "content": "Install the Blacksmith GitHub App for your organization at the dashboard, then swap your runs-on tag to a Blacksmith runner label (e.g. blacksmith-2vcpu-ubuntu-2404). Not a REST call; documented here for reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://app.blacksmith.sh",
+              "protocol": "https",
+              "host": ["app", "blacksmith", "sh"],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "9d2c1b00-0010-4a10-9c01-blacksmith0010",
+      "name": "Testbox CLI",
+      "description": {
+        "content": "Blacksmith Testbox CLI (beta) - the documented programmatic surface. Lets coding agents run CI against local changes instantly.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d2c1b00-0011-4a10-9c01-blacksmith0011",
+          "name": "blacksmith testbox warmup",
+          "request": {
+            "name": "blacksmith testbox warmup",
+            "description": {
+              "content": "Dispatches a testbox and returns an ID immediately. Required before any run command. Flags: --idle-timeout, --job, --ref, --ssh-public-key. Example: blacksmith testbox warmup blacksmith-testbox.yml",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://docs.blacksmith.sh/blacksmith-testbox/cli",
+              "protocol": "https",
+              "host": ["docs", "blacksmith", "sh"],
+              "path": ["blacksmith-testbox", "cli"],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "9d2c1b00-0012-4a10-9c01-blacksmith0012",
+          "name": "blacksmith testbox run",
+          "request": {
+            "name": "blacksmith testbox run",
+            "description": {
+              "content": "Syncs local changes (rsync --delete --checksum) and executes a command on the testbox, blocking until ready. Flags: --id, --debug, --ssh-private-key. Exits with the remote command's exit code. Example: blacksmith testbox run --id tbx_... \"npm test\"",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://docs.blacksmith.sh/blacksmith-testbox/cli",
+              "protocol": "https",
+              "host": ["docs", "blacksmith", "sh"],
+              "path": ["blacksmith-testbox", "cli"],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "9d2c1b00-0013-4a10-9c01-blacksmith0013",
+          "name": "blacksmith testbox status",
+          "request": {
+            "name": "blacksmith testbox status",
+            "description": {
+              "content": "Shows the current status of a testbox. Supports --wait to block until the testbox is ready.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://docs.blacksmith.sh/blacksmith-testbox/cli",
+              "protocol": "https",
+              "host": ["docs", "blacksmith", "sh"],
+              "path": ["blacksmith-testbox", "cli"],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "9d2c1b00-0020-4a10-9c01-blacksmith0020",
+      "name": "Dashboard & Observability",
+      "description": {
+        "content": "Web console for org setup, runner/cache management, and observability. Not a REST API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d2c1b00-0021-4a10-9c01-blacksmith0021",
+          "name": "Open Blacksmith Console",
+          "request": {
+            "name": "Open Blacksmith Console",
+            "description": {
+              "content": "CI analytics, run history, logs, metrics, monitors, test analytics, and SSH access live in the dashboard at app.blacksmith.sh.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://app.blacksmith.sh",
+              "protocol": "https",
+              "host": ["app", "blacksmith", "sh"],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.blacksmith.sh",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": null,
+  "info": {
+    "_postman_id": "9d2c1b00-0000-4a10-9c01-blacksmith0000",
+    "name": "Blacksmith",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Blacksmith runs GitHub Actions up to 2x faster at half the cost. It exposes no documented public REST API; it is used via a GitHub App, runs-on runner tags, useblacksmith/* GitHub Actions, the Testbox CLI, and the app.blacksmith.sh dashboard. This collection documents those real surfaces.\n\nContact Support:\n URL: https://app.blacksmith.sh/?support=open",
+      "type": "text/plain"
+    }
+  }
+}
