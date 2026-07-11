@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/blacksmith-sh-openapi.yml
+docs: https://docs.blacksmith.sh/blacksmith-administration/permissions
+note: Blacksmith publishes no OAuth scopes - login is exclusively GitHub SSO via
+  the Blacksmith GitHub App, and dashboard access is role-based, inherited directly
+  from GitHub organization/repository permissions rather than granted through scopes
+  (https://docs.blacksmith.sh/blacksmith-administration/permissions).
+schemes:
+- name: githubApp
+  source: openapi/blacksmith-sh-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://github.com/apps/blacksmith
+    tokenUrl: https://github.com/login/oauth/access_token
+  description: Access to Blacksmith is authorized through the Blacksmith GitHub App installed
+    on a GitHub organization, not via a public API key or bearer token. There is no documented
+    machine-to-machine API auth scheme.
+scopes: []

@@ -120,6 +120,8 @@ apis:
     metrics, monitors, SSH access, and test analytics. A management console, not a
     documented public REST API.
 common:
+- type: OAuthScopes
+  url: scopes/blacksmith-sh-scopes.yml
 - type: GitHubOrganization
   url: https://github.com/useblacksmith
 - type: LinkedIn
@@ -138,6 +140,8 @@ common:
   url: rate-limits/blacksmith-sh-rate-limits.yml
 - type: FinOps
   url: finops/blacksmith-sh-finops.yml
+- type: Blog
+  url: https://www.blacksmith.sh/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
