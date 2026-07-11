@@ -120,6 +120,12 @@ apis:
     metrics, monitors, SSH access, and test analytics. A management console, not a
     documented public REST API.
 common:
+- type: TrustCenter
+  url: security/blacksmith-sh-trust-center.yml
+- type: DomainSecurity
+  url: security/blacksmith-sh-domain-security.yml
+- type: Authentication
+  url: authentication/blacksmith-sh-authentication.yml
 - type: OAuthScopes
   url: scopes/blacksmith-sh-scopes.yml
 - type: GitHubOrganization

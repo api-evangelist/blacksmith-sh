@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/blacksmith-sh-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: githubApp
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://github.com/apps/blacksmith
+    tokenUrl: https://github.com/login/oauth/access_token
+    scopes: 0
+  description: Access to Blacksmith is authorized through the Blacksmith GitHub App installed
+    on a GitHub organization, not via a public API key or bearer token. There is no documented
+    machine-to-machine API auth scheme.
+  sources:
+  - openapi/blacksmith-sh-openapi.yml
