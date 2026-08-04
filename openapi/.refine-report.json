@@ -1,0 +1,14 @@
+{
+  "provider": "blacksmith-sh",
+  "sources": [
+    "blacksmith-sh-openapi.yml"
+  ],
+  "outputs": [],
+  "archived": [
+    "archived blacksmith-sh-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
