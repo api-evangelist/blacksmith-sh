@@ -128,6 +128,11 @@ apis:
 - aid: blacksmith-sh:dashboard
   name: Blacksmith Dashboard and Observability
   tags:
+  - Dashboards
+  - Observability
+  - Analytics
+  - Management
+  tags_raw:
   - Dashboard
   - Observability
   - Analytics
